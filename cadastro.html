@@ -30,14 +30,15 @@
             font-size: 16px; 
             margin: 0;
             padding-right: 10px; 
+            cursor: pointer;
         }
 
         .barraLateral {
             background-color: rgb(73, 85, 253);
             flex-direction: column;
-            width: 200px;
+            width: -200px;
             height: 600px;
-            padding: 10px;
+            padding: 7px;
             border-radius: 10px;
             display: flex;
             top: 40px;
@@ -94,12 +95,37 @@
             bottom: 70px;
             right: 70px;
         }
+
+        .barraDireita {
+            position: fixed;
+            top: 40px;
+            right: -200px;
+            background-color: rgb(73, 85, 253);
+            border-radius: 10px 0 0 10px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            cursor: pointer;
+            
+        }
+
+        .barraDireita a {
+            color: aliceblue;
+            margin: 8px;
+        }
+
     </style>
 </head>
 
 <body>
     <div class="top-bar" >
-        <h1>Fernanda</h1>
+        <h1 onclick="toggleBarraDireita()">Fernanda</h1> 
+    </div>
+    <div class="barraDireita">
+        <a href="ponto.html">Ponto</a>
+        <a href="cadastro.html">Cadastrar funcionário</a>
+        <a href="">Sair da minah conta</a>
     </div>
     <div class="barraLateral">
         <div class="menu-icon">&#9776;</div>
@@ -129,12 +155,17 @@
     <script>
         const barraLateral = document.querySelector('.barraLateral');
         const menuIcon = document.getElementById('menuIcon');
+        const barraDireita = document.querySelector('.barraDireita');
 
         menuIcon.addEventListener('click', function () {
-            // Alternar entre abrir e fechar a barra lateral
             const leftValue = barraLateral.style.left === '0px' ? '-200px' : '0';
             barraLateral.style.left = leftValue;
         });
+
+        function toggleBarraDireita() {
+            const rightValue = barraDireita.style.right === '0px' ? '-200px' : '0';
+            barraDireita.style.right = rightValue;
+        }
     </script>
 </body>
 </html>
