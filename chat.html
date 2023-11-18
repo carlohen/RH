@@ -1,11 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat</title>
+    <title>Meu site</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0px;
+            background-color: rgb(255, 255, 255);
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+        }
+
+        .top-bar {
+            background-color: rgb(73, 85, 253);
+            color: #ffffff;
+            padding: 14px 0px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1;
+            display: flex;
+            justify-content: flex-end;
+            /* Alinha o conteúdo à direita */
+        }
+
+        .top-bar h1 {
+            font-size: 16px;
+            margin: 0;
+            padding-right: 10px;
+            cursor: pointer;
+        }
+
+        .barraLateral {
+            background-color: rgb(73, 85, 253);
+            flex-direction: column;
+            width: -200px;
+            height: 600px;
+            padding: 7px;
+            border-radius: 10px;
+            display: flex;
+            top: 40px;
+            left: -200px;
+            transition: left 0.3s;
+            align-items: flex-start;
+            position: fixed;
+        }
+
+        .barraLateral:hover {
+            left: 0;
+        }
+
+        .barraLateral a {
+            color: aliceblue;
+            margin: 8px;
+            align-items: 100px;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            color: aliceblue;
+            position: fixed;
+            left: 10px;
+            top: 10px;
+            z-index: 1;
+        }
+
+        .barraDireita {
+            position: fixed;
+            top: 40px;
+            right: -200px;
+            background-color: rgb(73, 85, 253);
+            border-radius: 10px 0 0 10px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            cursor: pointer;
+        }
+
+        .barraDireita a {
+            color: aliceblue;
+            margin: 8px;
+        }
+
+        .chat {
+            flex: 1px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .icon {
+            position: absolute;
+            left: 112px;
+            margin-right: 10px;
+            /* Adicione algum espaçamento à direita do ícone */
+        }
+
+        .container {
+            flex: 0 0 120px; /* Largura fixa de 100px para o container */
+            background-color: #b1b1b1;
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            margin-right: 10px; /* Adiciona uma margem à direita */
+        }
+        
+
+        .container p {
+            cursor: pointer;
+        }
+
+        .conversa {
+            background-color: #b1b1b1;
+            width: calc(100% - 150px); /* Ajusta a largura da conversa subtraindo a largura do container e a margem à direita do container-wrapper */
+            padding: 20px;
+            overflow-y: scroll;
+            max-height: 100%;
+            margin-top: 20px;
+            flex: 1;
+        }
+
+        .conversa p {
+            cursor: pointer;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            width: auto;
+        }   
+
+        .mensagem-enviada {
+            align-self: flex-end; /* Alinha as mensagens enviadas à direita */
+            background-color: #a2e8a4; /* Cor de fundo diferente para mensagens enviadas */
+        }
+
+        
+    </style>
 </head>
+
 <body>
+    <div class="top-bar">
+        <h1 onclick="toggleBarraDireita()">Fernanda</h1>
+    </div>
+    <div class="barraDireita">
+        <a href="ponto.html">Ponto</a>
+        <a href="cadastro.html">Cadastrar funcionário</a>
+        <a href="">Sair da conta</a>
+    </div>
+    <div class="barraLateral">
+        <div class="menu-icon">&#9776;</div>
+        <a href="cadastro.html">Cadastro de funcionário</a>
+        <a href="ponto.html">Ponto</a>
+        <a href="relatorio.html">Relatório</a>
+        <a href="chat.html">Chat</a>
+    </div>
+
+    <div class="chat">
+        <h1>Chat</h1>
+    </div>
+    <div class="container-wrapper">
+        <div class="container">
+            <p onclick="entrarNaConversa('grupo')"> GRUPO <span class="icon">+</span></p>
+
+        </div>
+        <div>   </div>
+        <div class="conversa" id="conversa">
+            <!-- Área de conversa -->
+        </div>
+    </div>
     
+
+
+    <div class="menu-icon" id="menuIcon">&#9776;</div>
+
+    <script>
+        const barraLateral = document.querySelector('.barraLateral');
+        const menuIcon = document.getElementById('menuIcon');
+        const barraDireita = document.querySelector('.barraDireita');
+        const conversaDiv = document.getElementById('conversa');
+        const mensagemInput = document.getElementById('mensagemInput');
+
+        menuIcon.addEventListener('click', function () {
+            const leftValue = barraLateral.style.left === '0px' ? '-200px' : '0';
+            barraLateral.style.left = leftValue;
+        });
+
+        function toggleBarraDireita() {
+            const rightValue = barraDireita.style.right === '0px' ? '-200px' : '0';
+            barraDireita.style.right = rightValue;
+        }
+
+        
+    </script>
 </body>
+
 </html>
