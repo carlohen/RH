@@ -142,6 +142,76 @@
             background-color: #a2e8a4; /* Cor de fundo diferente para mensagens enviadas */
         }
 
+        .chat-container {
+            width: 90%;
+            padding: 16px 32px;
+            min-height: 600px;
+            margin: 0 auto;
+            background-color: #E8E8E8;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .chat-message {
+            max-width: 40%;
+            padding: 16px;
+            border-radius: 4px;
+        }
+
+        .other-message {
+            background-color: #FFF;
+        }
+
+        .user-message {
+            background-color: #6F66FF;
+            color: white;
+        }
+
+        .message-emissor {
+            font-size: 12px;
+            color: gray;
+        }
+
+        .user-direction {
+            display: flex;
+            justify-content: end;
+        }
+
+        .other-direction {
+            display: flex;
+            gap: 8px;
+            flex-direction: column;
+            justify-content: start;
+        }
+        
+        .input-container {
+            display: flex;
+            gap: 100px;
+            margin-top: 300px;
+        }
+        .input-container input {
+            flex: 1;
+            padding: 10px;
+            background-color: #6F66FF;
+            color: #FFF;
+            border-color: #6F66FF;
+            border-radius: 10px;
+        }
+        .input-container button {
+            padding: 10px;
+            width: 100px;
+            cursor: pointer;
+            border-radius: 16px;
+            background-color: #6F66FF;
+            border-color: #6F66FF;
+            color: #FFF;
+        }
+        .input-container input::placeholder {
+        color: #FFF; 
+    }
+
         
     </style>
 </head>
@@ -166,16 +236,27 @@
     <div class="chat">
         <h1>Chat</h1>
     </div>
-    <div class="container-wrapper">
-        <div class="container">
-            <p onclick="entrarNaConversa('grupo')"> GRUPO <span class="icon">+</span></p>
-
+    <div class="chat-container">
+        <div class="chat-content">
+            <div class="other-direction">
+                <span class="message-emissor">Renato</span>
+                <div class="chat-message other-message">
+                    Olá!
+                </div>
+            </div>
+            <div class="user-direction">
+                <div class="chat-message user-message">
+                    Eae rapaziada tamo juntooooo!
+                </div>
+            </div>
         </div>
-        <div>   </div>
-        <div class="conversa" id="conversa">
-            <!-- Área de conversa -->
+        <div class="input-container">
+            <input type="text" placeholder="Digite">
+            <button onclick="enviarMensagem()">Enviar</button>
         </div>
     </div>
+    
+    
     
 
 
