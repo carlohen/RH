@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu site</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0px;
+            background-color: rgb(216, 216, 216);
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+        }
+
+        .top-bar {
+            background-color: rgb(73, 85, 253);
+            color: #ffffff; 
+            padding: 14px 0px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1;
+            display: flex;
+            justify-content: flex-end; /* Alinha o conteúdo à direita */
+        }
+        .top-bar h1 {
+            font-size: 16px; 
+            margin: 0;
+            padding-right: 10px; 
+        }
+
+        .barraLateral {
+            background-color: rgb(73, 85, 253);
+            flex-direction: column;
+            width: 200px;
+            height: 600px;
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            top: 40px;
+            left: -200px;
+            transition: left 0.3s;
+            align-items: flex-start;
+            position: fixed;
+        }
+
+        .barraLateral:hover {
+            left: 0;
+        }
+
+        .barraLateral a {
+            
+            color: aliceblue;
+            margin: 8px;
+            align-items: 100px;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            color: aliceblue;
+            position: fixed;
+            left: 10px;
+            top: 10px;
+            z-index: 1;
+        }
+
+        .cadastro {
+            flex: 1px;
+            text-align: center;
+            margin-top: 70px; /* Ajuste para evitar sobreposição com a barra superior */
+        }
+
+        input {
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            height: 15px;
+            width: 260px;
+        }
+
+        button {
+            padding: 10px;
+            width: 100px;
+            cursor: pointer;
+            border-radius: 20px;
+            border: none;
+            background-color: rgb(67, 71, 250);
+            color: aliceblue;
+            position: fixed;
+            bottom: 70px;
+            right: 70px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-bar" >
+        <h1>Fernanda</h1>
+    </div>
+    <div class="barraLateral">
+        <div class="menu-icon">&#9776;</div>
+        <a href="cadastro.html">Cadastro de funcionário</a>
+        <a href="ponto.html">Ponto</a>
+        <a href="relatorio.html">Relatório</a>
+        <a href="chat.html">Chat</a>
+    </div>
+    <div class="cadastro">
+        <h1>Cadastro de Funcionário</h1>
+        <p>Nome do funcionário</p>
+        <input type="text" name="nome" id="nome" placeholder="Digite">  
+        <p>CPF</p>
+        <input type="number" name="CPF" id="CPF" placeholder="Digite">
+        <p>Cargo</p>
+        <input type="text" name="cargo" id="cargo" placeholder="Digite">
+        <p>Setor</p>
+        <input type="text" name="setor" id="setor" placeholder="Digite">
+        <p>Salário</p>
+        <input type="number" name="salario" id="salario" placeholder="Digite">
+    </div>
+    <div>
+        <button>Cadastrar</button>
+    </div>
+    <div class="menu-icon" id="menuIcon">&#9776;</div>
+
+    <script>
+        const barraLateral = document.querySelector('.barraLateral');
+        const menuIcon = document.getElementById('menuIcon');
+
+        menuIcon.addEventListener('click', function () {
+            // Alternar entre abrir e fechar a barra lateral
+            const leftValue = barraLateral.style.left === '0px' ? '-200px' : '0';
+            barraLateral.style.left = leftValue;
+        });
+    </script>
+</body>
+</html>
