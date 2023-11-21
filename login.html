@@ -2,10 +2,170 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu site</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0px;
+            background-color: rgb(255, 255, 255);
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+        }
+
+        .top-bar {
+            background-color: rgb(73, 85, 253);
+            color: #ffffff; 
+            padding: 14px 0px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1;
+            display: flex;
+            justify-content: flex-end; /* Alinha o conteúdo à direita */
+        }
+        .top-bar h1 {
+            font-size: 16px; 
+            margin: 0;
+            padding-right: 10px; 
+            cursor: pointer;
+        }
+
+        .barraLateral {
+            background-color: rgb(73, 85, 253);
+            flex-direction: column;
+            width: -200px;
+            height: 600px;
+            padding: 7px;
+            border-radius: 10px;
+            display: flex;
+            top: 40px;
+            left: -200px;
+            transition: left 0.3s;
+            align-items: flex-start;
+            position: fixed;
+        }
+
+        .barraLateral:hover {
+            left: 0;
+        }
+
+        .barraLateral a {
+            
+            color: aliceblue;
+            margin: 8px;
+            align-items: 100px;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            color: aliceblue;
+            position: fixed;
+            left: 10px;
+            top: 10px;
+            z-index: 1;
+        }
+
+        .login{
+            flex: 1px;
+            text-align: center;
+            margin-top: 70px; /* Ajuste para evitar sobreposição com a barra superior */
+            
+        }
+
+        input {
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            height: 15px;
+            width: 260px;
+            background-color: rgb(206, 206, 206);
+        }
+
+        button {
+            padding: 10px;
+            width: 100px;
+            cursor: pointer;
+            border-radius: 20px;
+            border: none;
+            background-color: rgb(67, 71, 250);
+            color: aliceblue;
+            position: fixed;
+            bottom: 70px;
+            right: 70px;
+        }
+
+        .barraDireita {
+            position: fixed;
+            top: 40px;
+            right: -200px;
+            background-color: rgb(73, 85, 253);
+            border-radius: 10px 0 0 10px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            cursor: pointer;
+            
+        }
+
+        .barraDireita a {
+            color: aliceblue;
+            margin: 8px;
+        }
+
+    </style>
 </head>
+
 <body>
-    <h1>uau</h1>
+    <div class="top-bar" >
+        <h1 onclick="toggleBarraDireita()">Fernanda</h1> 
+    </div>
+    <div class="barraDireita">
+        <a href="ponto.html">Ponto</a>
+        <a href="cadastro.html">Cadastrar funcionário</a>
+        <a href="login.html">Login</a>
+        <a href="">Sair da conta</a>
+    </div>
+    <div class="barraLateral">
+        <div class="menu-icon">&#9776;</div>
+        <a href="cadastro.html">Cadastro de funcionário</a>
+        <a href="login.html">Login</a>
+        <a href="ponto.html">Ponto</a>
+        <a href="relatorio.html">Relatório</a>
+        <a href="chat.html">Chat</a>
+    </div>
+    <div class="login">
+        <h1>Login</h1>
+        <p>Usuário</p>
+        <input type="text" name="nome" id="nome" placeholder="Digite seu usuário">  
+        <p>Senha</p>
+        <input type="password" name="senha" id="senha" placeholder="Digite sua senha">
+        
+        
+    </div>
+    <div>
+        <button>Entrar</button>
+    </div>
+    <div class="menu-icon" id="menuIcon">&#9776;</div>
+
+    <script>
+        const barraLateral = document.querySelector('.barraLateral');
+        const menuIcon = document.getElementById('menuIcon');
+        const barraDireita = document.querySelector('.barraDireita');
+
+        menuIcon.addEventListener('click', function () {
+            const leftValue = barraLateral.style.left === '0px' ? '-200px' : '0';
+            barraLateral.style.left = leftValue;
+        });
+
+        function toggleBarraDireita() {
+            const rightValue = barraDireita.style.right === '0px' ? '-200px' : '0';
+            barraDireita.style.right = rightValue;
+        }
+    </script>
 </body>
 </html>
