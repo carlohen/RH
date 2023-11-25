@@ -151,11 +151,17 @@
         <input type="number" name="salario" id="salario" placeholder="Digite">
     </div>
     <div>
-        <button>Cadastrar</button>
+        <button id="butCadastrar">Cadastrar</button>
     </div>
     <div class="menu-icon" id="menuIcon">&#9776;</div>
-
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
+        const base = axios.create({
+            baseURL: 'http://localhost:3001/', // Set your default base URL here
+                timeout: 5000, // Set a timeout if needed
+            // Other configurations...
+            });
+
         const barraLateral = document.querySelector('.barraLateral');
         const menuIcon = document.getElementById('menuIcon');
         const barraDireita = document.querySelector('.barraDireita');
@@ -169,6 +175,68 @@
             const rightValue = barraDireita.style.right === '0px' ? '-200px' : '0';
             barraDireita.style.right = rightValue;
         }
+
+        //usando axios
+        // Função para enviar os dados do formulário quando o botão "Cadastrar" é clicado
+        
+        const Cadastrar = () => {
+            const name = document.getElementById('nome').value;
+            const cpf = document.getElementById('CPF').value;
+            const role = document.getElementById('cargo').value;
+            const sector = document.getElementById('setor').value;
+            const wage= document.getElementById('salario').value;
+            const funcionario = {
+                name,
+                cpf,
+                role,
+                sector,
+                wage
+            }
+            base.post('employee/', funcionario, {
+                headers: {
+                    'Access-Control-Allow-Origin':  '*'
+                }
+            })
+                .then(response => {
+                    console.log('Funcionário cadastrado com sucesso:');
+            })
+            .catch(error => {
+                console.error('Erro no cadastro do funcionário:', error);
+            });
+
+        }
+        document.getElementById("butCadastrar").addEventListener("click", Cadastrar);
+            
+        
+
+        // function cadastrarFuncionario() {
+        //     // Coletando os dados do formulário
+        //     const nome = document.getElementById('nome').value;
+        //     const cpf = document.getElementById('CPF').value;
+        //     const cargo = document.getElementById('cargo').value;
+        //     const setor = document.getElementById('setor').value;
+        //     const salario = document.getElementById('salario').value;
+
+        //     // Criando um objeto com os dados do funcionário
+        //     const funcionario = {
+        //         nome: nome,
+        //         cpf: cpf,
+        //         cargo: cargo,
+        //         setor: setor,
+        //         salario: salario
+        //     };
+
+        //     // Fazendo a requisição POST com o Axios
+        //     axios.post('URL_DA_SUA_API', funcionario)
+        //         .then(response => {
+        //             // Manipulando a resposta bem-sucedida
+        //             console.log('Funcionário cadastrado com sucesso:', response.data);
+        //         })
+        //         .catch(error => {
+        //             // Manipulando erros
+        //             console.error('Erro no cadastro do funcionário:', error);
+        //         });
+        // }
     </script>
 </body>
 </html>
