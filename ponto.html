@@ -175,20 +175,26 @@
             <p>Funcionário</p>
             <input class="func" type="text" name="nome" id="nome" placeholder="">  
             <div class="button-container">
-                <button class="entrada">Entrada</button>
-                <button class="pausa">Pausa</button>
+                <button class="entrada" id="btnEntrada">Entrada</button>
+                <button class="pausa" id="btnPausa">Pausa</button>
             </div>
             <div class="button-container">
-                <button class="retorno">Retorno</button>
-                <button class="saida">Saída</button>
+                <button class="retorno" id="btnRetorno">Retorno</button>
+                <button class="saida" id="btnSaida">Saída</button>
             </div>
             <div class="registro">
                 <button>Registrar</button>
             </div>
         </div>
     </body>
-
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
+        const base = axios.create({
+            baseURL: 'http://localhost:3001/', // Set your default base URL here
+                timeout: 5000, // Set a timeout if needed
+            // Other configurations...
+        });
+
         const barraLateral = document.querySelector('.barraLateral');
         const menuIcon = document.getElementById('menuIcon');
         const barraDireita = document.querySelector('.barraDireita');
@@ -220,6 +226,38 @@
 				// Exibe na tela usando a div#data-hora
 				document.getElementById('data-hora').innerHTML = dataHora;
 			}, 1000);
+
+            //usando o axios:
+            const Registrar = () => {
+                const name = document.getElementById('nome').value;
+                const status = document.getElementById('entrada').value;
+                const date = document.getElementById('pausa').value;
+                const update_date = document.getElementById('retorno').value;
+                const employee_id = document.getElementById('saida').value;
+            const funcionario = {
+                name,
+                status,
+                date,
+                update_date,
+                employee_id
+            }
+
+            base.post('point/', funcionario, {
+                headers: {
+                    'Access-Control-Allow-Origin':  '*'
+                }
+            })
+            .then(response => {
+                console.log('Ponto do funcionário registrado com sucesso:');
+            })
+            .catch(error => {
+                console.error('Erro no registro de ponto do funcionário:', error);
+            });
+
+        }
+            document.getElementById("btnRegistrar").addEventListener("click", Registrar);
+
+
     </script>
 
 </html>
