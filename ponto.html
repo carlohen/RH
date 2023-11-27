@@ -175,15 +175,15 @@
             <p>Funcionário</p>
             <input class="func" type="text" name="nome" id="nome" placeholder="">  
             <div class="button-container">
-                <button class="entrada" id="btnEntrada">Entrada</button>
-                <button class="pausa" id="btnPausa">Pausa</button>
+                <button class="entrada click-status" data-status="CHECKIN" id="btnEntrada">Entrada</button>
+                <button class="pausa click-status" data-status="PAUSE" id="btnPause">Pausa</button>
             </div>
             <div class="button-container">
-                <button class="retorno" id="btnRetorno">Retorno</button>
-                <button class="saida" id="btnSaida">Saída</button>
+                <button class="retorno click-status" data-status="RETURN" id="btnRetorno">Retorno</button>
+                <button class="saida click-status"  data-status="CHECKOUT" id="btnSaida">Saída</button>
             </div>
             <div class="registro">
-                <button>Registrar</button>
+                <button id="btnRegistrar" onclick="Registrar(event)">Registrar</button>
             </div>
         </div>
     </body>
@@ -229,11 +229,12 @@
 
             //usando o axios:
             const Registrar = () => {
-                const name = document.getElementById('nome').value;
-                const status = document.getElementById('entrada').value;
-                const date = document.getElementById('pausa').value;
-                const update_date = document.getElementById('retorno').value;
-                const employee_id = document.getElementById('saida').value;
+                //const name = document.getElementById('nome').value;
+                const nome = document.getElementById('nome');
+                const status = document.getAttribute('data-status');
+                const date = document.getElementById('dataHora').value;
+                const update_date = document.getElementById('btnRetorno').value;
+                const employee_id = document.getElementById('btnSaida').value;
             const funcionario = {
                 name,
                 status,
@@ -255,9 +256,8 @@
             });
 
         }
-            document.getElementById("btnRegistrar").addEventListener("click", Registrar);
-
-
+        document.getElementById("btnRegistrar").addEventListener("click", Registrar);
+            
     </script>
 
 </html>
