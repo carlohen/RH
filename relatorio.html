@@ -1,328 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relatório</title>
-    <style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Relatório</title>
+        <style>
 
 
 
 
-        body {
-            margin: 0;
-            padding: 0px;
-            background-color: rgb(255, 255, 255);
-            display: flex;
-            flex-direction: column;
-            font-family: Arial, sans-serif;
-            align-items: center; /* Centraliza no eixo horizontal */
-            justify-content: center; /* Centraliza no eixo vertical */
-            min-height: 100vh; /* Garante que a altura da tela seja coberta */
-        }
-        
-
-
-        .top-bar {
-            background-color: rgb(73, 85, 253);
-            color: #ffffff; 
-            padding: 14px 0px;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1;
-            display: flex;
-            justify-content: flex-end; /* Alinha o conteúdo à direita */
-        }
-
-        .top-bar h1 {
-            font-size: 16px; 
-            margin: 0;
-            padding-right: 10px; 
-            cursor: pointer;
-            background-color: rgb(73, 85, 253);
-            color: #ffffff;
-        }
-
-        .barraLateral {
-            background-color: rgb(73, 85, 253);
-            flex-direction: column;
-            width: -200px;
-            height: 600px;
-            padding: 7px;
-            border-radius: 10px;
-            display: flex;
-            top: 40px;
-            left: -400px;
-            transition: left 0.3s;
-            align-items: flex-start;
-            position: fixed;
-        }
-
-        .barraLateral:hover {
-            left: 0;
-        }
-
-        .barraLateral a {
+            body {
+                margin: 0;
+                padding: 0px;
+                background-color: rgb(255, 255, 255);
+                display: flex;
+                flex-direction: column;
+                font-family: Arial, sans-serif;
+                align-items: center; /* Centraliza no eixo horizontal */
+                justify-content: center; /* Centraliza no eixo vertical */
+                min-height: 100vh; /* Garante que a altura da tela seja coberta */
+            }
             
-            color: aliceblue;
-            margin: 8px;
-            align-items: 100px;
-        }
-
-        .menu-icon {
-            font-size: 24px;
-            cursor: pointer;
-            color: rgb(255, 255, 255);
-            position: fixed;
-            left: 10px;
-            top: 10px;
-            z-index: 1;
-        }
-        .ponto{
-            flex: 1px;
-            text-align: center;
-            margin-top: 70px;
-        }
-        .ponto p{
-            margin-bottom: 2px;
-            margin-right: 180px;
-        }
-        input {
-            padding: 5px;
-            border-radius: 5px;
-            border: none;
-            height: 15px;
-            width: 260px;
-            background-color: rgb(226, 226, 226);
-        }
-        .button-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .ponto .button-container .entrada {
-            background-color: #64bd41; 
-        }
-
-        .ponto .button-container .pausa {
-            background-color: rgb(38, 157, 187); 
-        }
-
-        .ponto .button-container .retorno {
-            background-color: rgb(176, 179, 47); 
-        }
-
-        .ponto .button-container .saida {
-            background-color: rgb(216, 84, 84); 
-        }
-
-        .ponto button {
-            padding: 16px;
-            width: 140px;
-            cursor: pointer;
-            border-radius: 20px;
-            border: none;
-            color: aliceblue;
-            margin: 20px;
-        }
-        .registro button {
-            background-color:rgb(73, 85, 253);
-            position: fixed;
-            bottom: 70px;
-            right: 70px;
-            border-radius: 20px;
-            padding: 10px;
-            width: 110px;
-        }
-
-        .barraDireita {
-            position: fixed;
-            top: 40px;
-            right: -200px;
-            background-color: rgb(73, 85, 253);
-            border-radius: 10px 0 0 10px;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            cursor: pointer;
-            
-        }
-
-        .barraDireita a {
-            color: aliceblue;
-            margin: 8px;
-        }
-
-        .titulo {
-            text-align: center;
-        }
-        .pie-chart {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-            
-        }
-
-        .slice {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            clip: rect(0, 100px, 200px, 0); /* Ajustar o clip para cada fatia */
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .slice:nth-child(1) {
-            background-color: red;
-            transform: rotate(0deg);
-        }
-
-        .slice:nth-child(2) {
-            background-color: green;
-            transform: rotate(108deg);
-        }
-
-        .slice:nth-child(3) {
-            background-color: yellow;
-            transform: rotate(162deg);
-        }
-
-        .slice:nth-child(4) {
-            background-color: blue;
-            transform: rotate(252deg);
-        }
-        .container {
-            border: 2px solid green;
-            border-radius: 5px;
-            padding: 10px;
-            display: inline-block;
-            
-        }
-
-        .value {
-            color: black;
-            font-weight: bold;
-        }
-        .chart {
-            width: 300px; /* Largura do gráfico */
-            height: 250px; /* Altura do gráfico */
-            margin: 20px auto; /* Centralizar o gráfico */
-            display: flex;
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .bar {
-            width: 40px; /* Largura das barras */
-            background-color: rgb(73, 85, 253); /* Cor das barras */
-            margin-right: 5px; /* Espaçamento entre as barras */
-            position: relative;
-        }
-
-        .bar::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            bottom: 0;
-            background-color: inherit;
-            transition: height 0.5s ease; /* Animação de crescimento */
-        }
-
-        .bar:hover::before {
-            height: calc(100% - attr(data-height) * 1px); /* Altura da barra ajustada */
-        }
-
-        
-    </style>
-</head>
-<body>
-    <div class="top-bar">
-        <h1 onclick="toggleBarraDireita()">Fernanda</h1> 
-    </div>
-    <div class="barraDireita">
-        <a href="ponto.html">Ponto</a>
-        <a href="cadastro.html">Cadastrar funcionário</a>
-        <a href="login.html">Login</a>
-        <a href="">Sair da conta</a>
-    </div>
-    <div class="barraLateral">
-        <div class="menu-icon">&#9776;</div>
-        <a href="cadastro.html">Cadastro de funcionário</a>
-        <a href="login.html">Login</a>
-        <a href="ponto.html">Ponto</a>
-        <a href="relatorio.html">Relatório</a>
-        <a href="chat.html">Chat</a>
-    </div>
-    <div class="titulo">
-        <br>
-        <br>
-        <h1>Relatório</h1>
-    </div>
-    <div>
-        <h3>Percentual por setor</h3>
-        <div class="menu-icon" id="menuIcon">&#9776;</div>
-        <div class="pie-chart">
-            <div class="slice" data-value="30"></div> 
-            <div class="slice" data-value="20"></div>
-            <div class="slice" data-value="15"></div>
-            <div class="slice" data-value="35"></div>
-        </div>
-        <h3>Folha de pagamento</h3>
-        <div class="container">
-            <span class="value">R$ 65.829,00</span>
-        </div>
-        <h3>Folha por mês</h3>
-        <div class="chart">
-            <div class="bar" style="height: 100px;">Jan</div>
-            <div class="bar" style="height: 150px;">Fev</div>
-            <div class="bar" style="height: 80px;">Mar</div>
-            <div class="bar" style="height: 120px;">Abr</div>
-            <div class="bar" style="height: 200px;">Mai</div>
-            <div class="bar" style="height: 90px;">Jun</div>
-          </div>          
-        </div>
-
-</body>
-    <script>
-        const barraLateral = document.querySelector('.barraLateral');
-        const menuIcon = document.getElementById('menuIcon');
-        const barraDireita = document.querySelector('.barraDireita');
-
-        menuIcon.addEventListener('click', function () {
-            const leftValue = barraLateral.style.left === '0px' ? '-200px' : '0';
-            barraLateral.style.left = leftValue;
-        });
-
-        function toggleBarraDireita() {
-            const rightValue = barraDireita.style.right === '0px' ? '-200px' : '0';
-            barraDireita.style.right = rightValue;
-        }
 
 
-        // Função para formatar 1 em 01
-            const zeroFill = n => {
-                return ('0' + n).slice(-2);
+            .top-bar {
+                background-color: rgb(73, 85, 253);
+                color: #ffffff; 
+                padding: 14px 0px;
+                position: fixed;
+                width: 100%;
+                top: 0;
+                z-index: 1;
+                display: flex;
+                justify-content: flex-end; /* Alinha o conteúdo à direita */
             }
 
-            // Cria intervalo
-            const interval = setInterval(() => {
-                // Pega o horário atual
-                const now = new Date();
+            .top-bar h1 {
+                font-size: 16px; 
+                margin: 0;
+                padding-right: 10px; 
+                cursor: pointer;
+                background-color: rgb(73, 85, 253);
+                color: #ffffff;
+            }
 
-                // Formata a data conforme dd/mm/aaaa hh:ii:ss
-                const dataHora = zeroFill(now.getUTCDate()) + '/' + zeroFill((now.getMonth() + 1)) + '/' + now.getFullYear() + ' ' + zeroFill(now.getHours()) + ':' + zeroFill(now.getMinutes()) + ':' + zeroFill(now.getSeconds());
+            .barraLateral {
+                background-color: rgb(73, 85, 253);
+                flex-direction: column;
+                width: -200px;
+                height: 600px;
+                padding: 7px;
+                border-radius: 10px;
+                display: flex;
+                top: 40px;
+                left: -400px;
+                transition: left 0.3s;
+                align-items: flex-start;
+                position: fixed;
+            }
 
-                // Exibe na tela usando a div#data-hora
-                document.getElementById('data-hora').innerHTML = dataHora;
-            }, 1000);
-    </script>
+            .barraLateral:hover {
+                left: 0;
+            }
+
+            .barraLateral a {
+                
+                color: aliceblue;
+                margin: 8px;
+                align-items: 100px;
+            }
+
+            .menu-icon {
+                font-size: 24px;
+                cursor: pointer;
+                color: rgb(255, 255, 255);
+                position: fixed;
+                left: 10px;
+                top: 10px;
+                z-index: 1;
+            }
+            .ponto{
+                flex: 1px;
+                text-align: center;
+                margin-top: 70px;
+            }
+            .ponto p{
+                margin-bottom: 2px;
+                margin-right: 180px;
+            }
+            input {
+                padding: 5px;
+                border-radius: 5px;
+                border: none;
+                height: 15px;
+                width: 260px;
+                background-color: rgb(226, 226, 226);
+            }
+            .button-container {
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+            }
+            .ponto .button-container .entrada {
+                background-color: #64bd41; 
+            }
+
+            .ponto .button-container .pausa {
+                background-color: rgb(38, 157, 187); 
+            }
+
+            .ponto .button-container .retorno {
+                background-color: rgb(176, 179, 47); 
+            }
+
+            .ponto .button-container .saida {
+                background-color: rgb(216, 84, 84); 
+            }
+
+            .ponto button {
+                padding: 16px;
+                width: 140px;
+                cursor: pointer;
+                border-radius: 20px;
+                border: none;
+                color: aliceblue;
+                margin: 20px;
+            }
+            .registro button {
+                background-color:rgb(73, 85, 253);
+                position: fixed;
+                bottom: 70px;
+                right: 70px;
+                border-radius: 20px;
+                padding: 10px;
+                width: 110px;
+            }
+
+            .barraDireita {
+                position: fixed;
+                top: 40px;
+                right: -200px;
+                background-color: rgb(73, 85, 253);
+                border-radius: 10px 0 0 10px;
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                cursor: pointer;
+                
+            }
+
+            .barraDireita a {
+                color: aliceblue;
+                margin: 8px;
+            }
+
+            .titulo {
+                text-align: center;
+            }
+            .pie-chart {
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+                position: relative;
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+                
+            }
+
+            .slice {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                clip: rect(0, 100px, 200px, 0); /* Ajustar o clip para cada fatia */
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+            }
+
+            .slice:nth-child(1) {
+                background-color: red;
+                transform: rotate(0deg);
+            }
+
+            .slice:nth-child(2) {
+                background-color: green;
+                transform: rotate(108deg);
+            }
+
+            .slice:nth-child(3) {
+                background-color: yellow;
+                transform: rotate(162deg);
+            }
+
+            .slice:nth-child(4) {
+                background-color: blue;
+                transform: rotate(252deg);
+            }
+            .container {
+                border: 2px solid green;
+                border-radius: 5px;
+                padding: 10px;
+                display: inline-block;
+                
+            }
+
+            .value {
+                color: black;
+                font-weight: bold;
+            }
+            .chart {
+                width: 300px; /* Largura do gráfico */
+                height: 250px; /* Altura do gráfico */
+                margin: 20px auto; /* Centralizar o gráfico */
+                display: flex;
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+            }
+
+            .bar {
+                width: 40px; /* Largura das barras */
+                background-color: rgb(73, 85, 253); /* Cor das barras */
+                margin-right: 5px; /* Espaçamento entre as barras */
+                position: relative;
+            }
+
+            .bar::before {
+                content: '';
+                position: absolute;
+                width: 100%;
+                bottom: 0;
+                background-color: inherit;
+                transition: height 0.5s ease; /* Animação de crescimento */
+            }
+
+            .bar:hover::before {
+                height: calc(100% - attr(data-height) * 1px); /* Altura da barra ajustada */
+            }
+
+            
+        </style>
+    </head>
+    <body>
+        <div class="top-bar">
+            <h1 onclick="toggleBarraDireita()">Fernanda</h1> 
+        </div>
+        <div class="barraDireita">
+            <a href="ponto.html">Ponto</a>
+            <a href="cadastro.html">Cadastrar funcionário</a>
+            <a href="login.html">Login</a>
+            <a href="">Sair da conta</a>
+        </div>
+        <div class="barraLateral">
+            <div class="menu-icon">&#9776;</div>
+            <a href="cadastro.html">Cadastro de funcionário</a>
+            <a href="login.html">Login</a>
+            <a href="ponto.html">Ponto</a>
+            <a href="relatorio.html">Relatório</a>
+            <a href="chat.html">Chat</a>
+        </div>
+        <div class="titulo">
+            <br>
+            <br>
+            <h1>Relatório</h1>
+        </div>
+        <div>
+            <h3>Percentual por setor</h3>
+            <div class="menu-icon" id="menuIcon">&#9776;</div>
+            <div>
+                <canvas id="pie-chart"></canvas>
+            </div>
+            <h3>Total da folha de pagamento</h3>
+            <div id="total-wage">
+
+            </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/relatorio.js"></script>
 </html>
