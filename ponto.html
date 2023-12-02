@@ -254,8 +254,10 @@
         }
         
         document.getElementById("btnRegistrar").addEventListener("click", Registrar);
-        statusButtons.addEventListener("click", setStatus);
 
+        statusButtons.forEach( button => {
+            statusButtons.addEventListener("click", setStatus);
+        })
     </script>
 
 </html>
