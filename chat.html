@@ -245,14 +245,14 @@
                     Olá!
                 </div>
             </div>
-            <div class="user-direction">
+            <div class="user-direction" id="conversa">
                 <div class="chat-message user-message">
                     Eae rapaziada tamo juntooooo!
                 </div>
             </div>
         </div>
         <div class="input-container">
-            <input type="text" placeholder="Digite">
+            <input type="text" id="mensagemInput" placeholder="Digite">
             <button onclick="enviarMensagem()">Enviar</button>
         </div>
     </div>
@@ -279,6 +279,28 @@
             const rightValue = barraDireita.style.right === '0px' ? '-200px' : '0';
             barraDireita.style.right = rightValue;
         }
+
+
+        function enviarMensagem() {
+            const conversaDiv = document.getElementById('conversa');
+            const mensagemInput = document.getElementById('mensagemInput');
+            const mensagem = mensagemInput.value;
+
+            if (mensagem.trim() !== '') {
+                const mensagemEnviadaDiv = document.createElement('div');
+                mensagemEnviadaDiv.className = 'user-direction';
+                const mensagemEnviada = document.createElement('div');
+                mensagemEnviada.className = 'chat-message user-message';
+                mensagemEnviada.textContent = mensagem;
+
+                mensagemEnviadaDiv.appendChild(mensagemEnviada);
+                conversaDiv.appendChild(mensagemEnviadaDiv);
+
+                // Limpar o campo de entrada após o envio da mensagem
+                mensagemInput.value = '';
+            }
+        }
+
 
         
     </script>
