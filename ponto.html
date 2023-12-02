@@ -147,6 +147,17 @@
             margin: 8px;
         }
 
+        .div-select {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .select-container {
+            width: 30%;
+
+        }
+
     </style>
 
 
@@ -172,8 +183,12 @@
         <div class="ponto">
             <h1>Ponto</h1>
             <div id="data-hora"></div>
-            <p>Funcionário</p>
-            <input class="func" type="text" name="nome" id="nome" placeholder="">  
+            <div class="div-select">
+                <h3>Funcionário</h3>
+                <select name="" id="select-employee" class="select-container">
+                    <option value=""></option>
+                </select>
+            </div>   
             <div class="button-container">
                 <button class="entrada click-status" data-status="CHECKIN" id="btnEntrada">Entrada</button>
                 <button class="pausa click-status" data-status="PAUSE" id="btnPause">Pausa</button>
@@ -182,82 +197,16 @@
                 <button class="retorno click-status" data-status="RETURN" id="btnRetorno">Retorno</button>
                 <button class="saida click-status"  data-status="CHECKOUT" id="btnSaida">Saída</button>
             </div>
+            <div>
+                <h3>Status selecionado:</h3>
+                <h3 id="status-show"></h3>
+            </div>
             <div class="registro">
                 <button id="btnRegistrar" onclick="Registrar(event)">Registrar</button>
             </div>
         </div>
     </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-        const base = axios.create({
-            baseURL: 'http://localhost:3001/', // Set your default base URL here
-                timeout: 5000, // Set a timeout if needed
-            // Other configurations...
-        });
-
-        let status;
-
-        const barraLateral = document.querySelector('.barraLateral');
-        const menuIcon = document.getElementById('menuIcon');
-        const barraDireita = document.querySelector('.barraDireita');
-        const statusButtons = document.querySelectorAll('.click-status');
-
-        menuIcon.addEventListener('click', function () {
-            const leftValue = barraLateral.style.left === '0px' ? '-200px' : '0';
-            barraLateral.style.left = leftValue;
-        });
-
-        function toggleBarraDireita() {
-            const rightValue = barraDireita.style.right === '0px' ? '-200px' : '0';
-            barraDireita.style.right = rightValue;
-        }
-
-
-        const zeroFill = n => {
-            return ('0' + n).slice(-2);
-        }
-
-        // Cria 
-        const interval = setInterval(() => {
-            const now = new Date();
-
-            const dataHora = zeroFill(now.getUTCDate()) + '/' + zeroFill((now.getMonth() + 1)) + '/' + now.getFullYear() + ' ' + zeroFill(now.getHours()) + ':' + zeroFill(now.getMinutes()) + ':' + zeroFill(now.getSeconds());
-
-            document.getElementById('data-hora').innerHTML = dataHora;
-        }, 1000);
-
-        const Registrar = () => {
-            const date = document.getElementById('dataHora').value;
-            const employeeId = 5
-            
-            const funcionario = {
-                status,
-                date,
-                employeeId
-            }
-
-            base.post('point/', funcionario, {
-                headers: {
-                    'Access-Control-Allow-Origin':  '*'
-                }
-            })
-            .then(response => {
-                console.log('Ponto do funcionário registrado com sucesso:');
-            })
-            .catch(error => {
-                console.error('Erro no registro de ponto do funcionário:', error);
-            });
-        }
-
-        const setStatus = event => {
-            status = event.target.dataset.status
-        }
-        
-        document.getElementById("btnRegistrar").addEventListener("click", Registrar);
-
-        statusButtons.forEach( button => {
-            button.addEventListener("click", setStatus);
-        })
-    </script>
-
+    <script src="./js/ponto.js"></script>
 </html>
