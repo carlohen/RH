@@ -195,9 +195,12 @@
             // Other configurations...
         });
 
+        let status;
+
         const barraLateral = document.querySelector('.barraLateral');
         const menuIcon = document.getElementById('menuIcon');
         const barraDireita = document.querySelector('.barraDireita');
+        const statusButtons = document.querySelectorAll('.click-status');
 
         menuIcon.addEventListener('click', function () {
             const leftValue = barraLateral.style.left === '0px' ? '-200px' : '0';
@@ -210,37 +213,27 @@
         }
 
 
-        // Função para formatar 1 em 01
-			const zeroFill = n => {
-				return ('0' + n).slice(-2);
-			}
+        const zeroFill = n => {
+            return ('0' + n).slice(-2);
+        }
 
-			// Cria intervalo
-			const interval = setInterval(() => {
-				// Pega o horário atual
-				const now = new Date();
+        // Cria 
+        const interval = setInterval(() => {
+            const now = new Date();
 
-				// Formata a data conforme dd/mm/aaaa hh:ii:ss
-				const dataHora = zeroFill(now.getUTCDate()) + '/' + zeroFill((now.getMonth() + 1)) + '/' + now.getFullYear() + ' ' + zeroFill(now.getHours()) + ':' + zeroFill(now.getMinutes()) + ':' + zeroFill(now.getSeconds());
+            const dataHora = zeroFill(now.getUTCDate()) + '/' + zeroFill((now.getMonth() + 1)) + '/' + now.getFullYear() + ' ' + zeroFill(now.getHours()) + ':' + zeroFill(now.getMinutes()) + ':' + zeroFill(now.getSeconds());
 
-				// Exibe na tela usando a div#data-hora
-				document.getElementById('data-hora').innerHTML = dataHora;
-			}, 1000);
+            document.getElementById('data-hora').innerHTML = dataHora;
+        }, 1000);
 
-            //usando o axios:
-            const Registrar = () => {
-                //const name = document.getElementById('nome').value;
-                const nome = document.getElementById('nome');
-                const status = document.getAttribute('data-status');
-                const date = document.getElementById('dataHora').value;
-                const update_date = document.getElementById('btnRetorno').value;
-                const employee_id = document.getElementById('btnSaida').value;
+        const Registrar = () => {
+            const date = document.getElementById('dataHora').value;
+            const employeeId = 5
+            
             const funcionario = {
-                name,
                 status,
                 date,
-                update_date,
-                employee_id
+                employeeId
             }
 
             base.post('point/', funcionario, {
@@ -254,10 +247,15 @@
             .catch(error => {
                 console.error('Erro no registro de ponto do funcionário:', error);
             });
-
         }
+
+        const setStatus = event => {
+            status = event.target.dataset.status
+        }
+        
         document.getElementById("btnRegistrar").addEventListener("click", Registrar);
-            
+        statusButtons.addEventListener("click", setStatus);
+
     </script>
 
 </html>
