@@ -155,9 +155,14 @@
         }
 
         .chat-message {
-            max-width: 40%;
+            
             padding: 16px;
             border-radius: 4px;
+            display: inline-block; /* Altera para exibição em bloco em linha */
+            margin-bottom: 10px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+
         }
 
         .other-message {
@@ -211,6 +216,13 @@
         .input-container input::placeholder {
         color: #FFF; 
     }
+        .user-direction {
+        display: flex;
+        flex-direction: column; /* Altera a direção do flex para coluna */
+        justify-content: flex-end; /* Alinha as mensagens no final do contêiner */
+        align-self: flex-end;
+    }
+
         
     </style>
 </head>
@@ -247,7 +259,7 @@
             </div>
             <div class="user-direction" id="conversa">
                 <div class="chat-message user-message">
-                    Eae rapaziada tamo juntooooo!
+                    !Eae rapaziada tamo juntooooo!
                 </div>
             </div>
         </div>
@@ -282,13 +294,15 @@
 
 
         function enviarMensagem() {
-            const conversaDiv = document.getElementById('conversa');
             const mensagemInput = document.getElementById('mensagemInput');
             const mensagem = mensagemInput.value;
 
             if (mensagem.trim() !== '') {
+                const conversaDiv = document.getElementById('conversa');
+
                 const mensagemEnviadaDiv = document.createElement('div');
                 mensagemEnviadaDiv.className = 'user-direction';
+
                 const mensagemEnviada = document.createElement('div');
                 mensagemEnviada.className = 'chat-message user-message';
                 mensagemEnviada.textContent = mensagem;
@@ -296,7 +310,6 @@
                 mensagemEnviadaDiv.appendChild(mensagemEnviada);
                 conversaDiv.appendChild(mensagemEnviadaDiv);
 
-                // Limpar o campo de entrada após o envio da mensagem
                 mensagemInput.value = '';
             }
         }
