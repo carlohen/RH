@@ -49,6 +49,7 @@
             transition: left 0.3s;
             align-items: flex-start;
             position: fixed;
+            z-index: 1;
         }
 
         .barraLateral:hover {
@@ -90,7 +91,7 @@
         }
 
         .chat {
-            flex: 1px;
+            
             text-align: center;
             margin-top: 50px;
         }
@@ -99,18 +100,18 @@
             position: absolute;
             left: 112px;
             margin-right: 10px;
-            /* Adicione algum espaçamento à direita do ícone */
+            
         }
 
         .container {
-            flex: 0 0 120px; /* Largura fixa de 100px para o container */
+            flex: 0 0 120px; 
             background-color: #b1b1b1;
             border-radius: 10px;
             padding: 10px;
             text-align: center;
             display: flex;
             flex-direction: column;
-            margin-right: 10px; /* Adiciona uma margem à direita */
+            margin-right: 10px; 
         }
         
 
@@ -120,13 +121,14 @@
 
         .conversa {
             background-color: #b1b1b1;
-            width: calc(100% - 150px); /* Ajusta a largura da conversa subtraindo a largura do container e a margem à direita do container-wrapper */
+            width: calc(100% - 150px);
             padding: 20px;
-            overflow-y: scroll;
-            max-height: 100%;
             margin-top: 20px;
-            flex: 1;
+            overflow-y: 0px;
+            scroll-behavior: smooth;
+            
         }
+
 
         .conversa p {
             cursor: pointer;
@@ -135,34 +137,33 @@
             border-radius: 5px;
             margin-bottom: 10px;
             width: auto;
-        }   
+        }
 
         .mensagem-enviada {
-            align-self: flex-end; /* Alinha as mensagens enviadas à direita */
-            background-color: #a2e8a4; /* Cor de fundo diferente para mensagens enviadas */
+            align-self: flex-end; 
+            background-color: #a2e8a4; 
         }
 
         .chat-container {
-            width: 90%;
-            padding: 16px 32px;
-            min-height: 600px;
+            width: 100%;
             margin: 0 auto;
             background-color: #E8E8E8;
             border-radius: 4px;
             display: flex;
             flex-direction: column;
             gap: 32px;
+            overflow-y: auto;
+            max-height: calc(100vh - 160px); /* Ajusta a altura máxima para acomodar a .input-container e o botão "enviar" */
         }
 
         .chat-message {
-            
             padding: 16px;
             border-radius: 4px;
-            display: inline-block; /* Altera para exibição em bloco em linha */
+            display: inline-block;
             margin-bottom: 10px;
+            margin-right: 10px;
             word-wrap: break-word;
             overflow-wrap: break-word;
-
         }
 
         .other-message {
@@ -181,8 +182,12 @@
 
         .user-direction {
             display: flex;
-            justify-content: end;
+            flex-direction: column-reverse; /* Inverte a direção para adicionar mensagens no final */
+            align-self: flex-end;
+            justify-content: flex-end;
         }
+
+
 
         .other-direction {
             display: flex;
@@ -192,9 +197,15 @@
         }
         
         .input-container {
+            
             display: flex;
             gap: 100px;
-            margin-top: 300px;
+            margin-top: 100px;
+            position: sticky; 
+            bottom: 0; 
+            background-color: #E8E8E8; 
+            padding: 16px 32px; 
+             
         }
         .input-container input {
             flex: 1;
@@ -216,13 +227,7 @@
         .input-container input::placeholder {
         color: #FFF; 
     }
-        .user-direction {
-        display: flex;
-        flex-direction: column; /* Altera a direção do flex para coluna */
-        justify-content: flex-end; /* Alinha as mensagens no final do contêiner */
-        align-self: flex-end;
-    }
-
+        
         
     </style>
 </head>
@@ -258,9 +263,7 @@
                 </div>
             </div>
             <div class="user-direction" id="conversa">
-                <div class="chat-message user-message">
-                    !Eae rapaziada tamo juntooooo!
-                </div>
+                
             </div>
         </div>
         <div class="input-container">
@@ -294,25 +297,31 @@
 
 
         function enviarMensagem() {
-            const mensagemInput = document.getElementById('mensagemInput');
-            const mensagem = mensagemInput.value;
+    const mensagemInput = document.getElementById('mensagemInput');
+    const mensagem = mensagemInput.value;
 
-            if (mensagem.trim() !== '') {
-                const conversaDiv = document.getElementById('conversa');
+    if (mensagem.trim() !== '') {
+        const conversaDiv = document.getElementById('conversa');
 
-                const mensagemEnviadaDiv = document.createElement('div');
-                mensagemEnviadaDiv.className = 'user-direction';
+        const mensagemEnviadaDiv = document.createElement('div');
+        mensagemEnviadaDiv.className = 'user-direction';
 
-                const mensagemEnviada = document.createElement('div');
-                mensagemEnviada.className = 'chat-message user-message';
-                mensagemEnviada.textContent = mensagem;
+        const mensagemEnviada = document.createElement('div');
+        mensagemEnviada.className = 'chat-message user-message';
+        mensagemEnviada.textContent = mensagem;
 
-                mensagemEnviadaDiv.appendChild(mensagemEnviada);
-                conversaDiv.appendChild(mensagemEnviadaDiv);
+        mensagemEnviadaDiv.appendChild(mensagemEnviada);
+        conversaDiv.prepend(mensagemEnviadaDiv); 
 
-                mensagemInput.value = '';
-            }
-        }
+        mensagemInput.value = '';
+
+        
+        conversaDiv.scrollTop = conversaDiv.scrollHeight;
+    }
+}
+
+
+    
 
 
         
